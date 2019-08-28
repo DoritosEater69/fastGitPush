@@ -34,4 +34,4 @@ try:
     os.system("git commit -m %s" % commitMsg)
     os.system("git push origin %s" % branch)
 except Exception as e:
-    print(e)
+    print("Error: ", e)
