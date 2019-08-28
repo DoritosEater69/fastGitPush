@@ -1,20 +1,20 @@
 import os
 
 
-#master
-# path = '/Applications/MAMP/htdocs/git/_programming/tools/python/fastGitPush/'
-# commitMsg = raw_input("Commit Message: ")
+master
+path = '/Applications/MAMP/htdocs/git/_programming/tools/python/fastGitPush/'
+commitMsg = raw_input("Commit Message: ")
 
-# for file in os.listdir(path):
-    # print(file)
-#if .git in Directory -> Do it / If not create git repo first
+for file in os.listdir(path):
+    print(file)
+if .git in Directory -> Do it / If not create git repo first
 
 
 
-# os.system("cd %s" % path)
-# os.system("git add *")
-# os.system("git commit -m %s" % commitMsg)
-# os.system("git push origin master")
+os.system("cd %s" % path)
+os.system("git add *")
+os.system("git commit -m %s" % commitMsg)
+os.system("git push origin master")
 
 
 #custom
@@ -35,3 +35,9 @@ try:
     os.system("git push origin %s" % branch)
 except Exception as e:
     print("Error: ", e)
+
+
+
+def menu():
+    #Master Def
+    #Custom Def
