@@ -28,8 +28,10 @@ for file in os.listdir(path):
 #if .git in Directory -> Do it / If not create git repo first
 
 
-
-os.system("cd %s" % path)
-os.system("git add *")
-os.system("git commit -m %s" % commitMsg)
-os.system("git push origin %s" % branch)
+try:
+    os.system("cd %s" % path)
+    os.system("git add *")
+    os.system("git commit -m %s" % commitMsg)
+    os.system("git push origin %s" % branch)
+except Exception as e:
+    print(e)
