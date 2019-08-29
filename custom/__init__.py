@@ -7,7 +7,7 @@ def push(message, path, branch):
     os.system("cd %s" % path)
     os.system("git add *")
     os.system("git commit -m %s" % message)
-    process.check_output(["git", "push", "origin", branch], stderr=STDOUT)
+    #process.check_output(["git", "push", "origin", branch], stderr=STDOUT)
 
     try:
         process.check_output(["git", "push", "origin", branch], stderr=STDOUT)
