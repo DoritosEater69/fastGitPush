@@ -1,15 +1,21 @@
 import os
+import subprocess as process
 from subprocess import check_output, STDOUT, CalledProcessError
 
 
 def push(message, path, branch):
+
+    os.system("cd %s" % path)
+    os.system("git add *")
+    os.system("git commit -m %s" % message)
     try:
-        os.system("cd %s" % path)
-        os.system("git add *")
-        os.system("git commit -m %s" % message)
-        os.system("git push origin %s" % branch)
-    except Exception as e:
-        print("Error: ", e)
+        process.check_output(["git", "push", "origin", branch], stderr=STDOUT)
+        print("Process: ", process)
+    except CalledProcessError as error:
+        errormsg = error.output, error.returncode, error.message
+
+    if "src refspec" and "does not match any" in str(errormsg):
+        print("WE GOT NO BRANCH HERE BOY")
 
         state = "pushed", path, "with commit Message: ", message, "to Branch: ", branch
         return state
