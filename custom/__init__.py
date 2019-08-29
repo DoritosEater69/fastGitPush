@@ -31,7 +31,11 @@ def push(message, path, branch):
         return state
 
 def init(path):
-    path = '/Applications/MAMP/htdocs/git/_programming/tools/python/fastGitPush/'
+    print(path)
+    if len(path) > 1:
+        path = '/_backup/htdocs/git/_programming/tools/python/fastGitPush'
+    else:
+        path = path
     commitMsg = raw_input("Commit Message: ")
     branch = raw_input("Branch name")
     #If branch not there -> react and create branch or push to master
