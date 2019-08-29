@@ -27,15 +27,8 @@ def push(message, path, branch):
             print("WE ALREADY GOT THIS BRANCH HERE BOY")
             os.system("git checkout %s" % branch)
 
-        colorred = "\033[1;31;40m]"
-        colorwhite = "\033[0m 1;31;40m"
-        highPath = colorred.format(str(path))
-        print(highPath)
-        #state = {highPath, colorwhite.format(str(branch)), colorred.format(str(message)), colorwhite.format("")}
-        #print(state)
-
-   # for content in state:
-        #print(content)
+    state = {path, message, branch}
+    print(state)
 
 def init(path):
     path = path
