@@ -4,11 +4,9 @@ from subprocess import check_output, STDOUT, CalledProcessError
 
 
 def push(message, path, branch):
-
     os.system("cd %s" % path)
     os.system("git add *")
     os.system("git commit -m %s" % message)
-    process.check_output(["git", "push", "origin", branch], stderr=STDOUT)
 
     try:
         process.check_output(["git", "push", "origin", branch], stderr=STDOUT)
@@ -16,19 +14,21 @@ def push(message, path, branch):
     except CalledProcessError as error:
         errormsg = error.output, error.returncode, error.message
         print("error", errormsg)
-    errormsg = error.output, error.returncode, error.Message
 
-    if "src refspec" and "does not match any" in str(errormsg):
-        print("WE GOT NO BRANCH HERE BOY")
-        os.system("git checkout -b %s" % branch)
-        os.system("git push origin %s" % branch)
+    # process.check_output(["git", "push", "origin", branch], stderr=STDOUT)
+    # log = error.output, error.returncode, error.Message
 
-    if "A branch named" and "already exists" in str(errormsg):
-        print("WE ALREADY GOT THIS BRANCH HERE BOY")
-        os.system("git checkout %s" % branch)
+        if "src refspec" and "does not match any" in str(errormsg):
+            print("WE GOT NO BRANCH HERE BOY")
+            os.system("git checkout -b %s" % branch)
+            os.system("git push origin %s" % branch)
 
-        state = "pushed", path, "with commit Message: ", message, "to Branch: ", branch
-        return state
+        if "A branch named" and "already exists" in str(errormsg):
+            print("WE ALREADY GOT THIS BRANCH HERE BOY")
+            os.system("git checkout %s" % branch)
+
+            state = "pushed", path, "with commit Message: ", message, "to Branch: ", branch
+            return state
 
 def init(path):
     path = path
