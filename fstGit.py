@@ -1,43 +1,27 @@
 import os
+import master as mstr
+import custom as cstm
 
 
-master
-path = '/Applications/MAMP/htdocs/git/_programming/tools/python/fastGitPush/'
-commitMsg = raw_input("Commit Message: ")
+#master
+def gitMaster():
+    mstr.init()
 
-for file in os.listdir(path):
-    print(file)
-if .git in Directory -> Do it / If not create git repo first
-
-
-
-os.system("cd %s" % path)
-os.system("git add *")
-os.system("git commit -m %s" % commitMsg)
-os.system("git push origin master")
-
-
-#custom
-path = '/Applications/MAMP/htdocs/git/_programming/tools/python/fastGitPush/'
-commitMsg = raw_input("Commit Message: ")
-branch = raw_input("Branch name")
-#If branch not there -> react and create branch or push to master
-
-for file in os.listdir(path):
-    print(file)
-#if .git in Directory -> Do it / If not create git repo first
-
-
-try:
-    os.system("cd %s" % path)
-    os.system("git add *")
-    os.system("git commit -m %s" % commitMsg)
-    os.system("git push origin %s" % branch)
-except Exception as e:
-    print("Error: ", e)
-
-
+def gitCustom():
+    custom.init()
 
 def menu():
-    #Master Def
-    #Custom Def
+    print("")
+    print("")
+    print("1. Master")
+    print("2. Custom")
+    print("")
+    print("")
+    choice = raw_input("# ")
+
+    if choice == "1":
+        gitMaster()
+    if choice == "2":
+        gitCustom()
+
+menu()
