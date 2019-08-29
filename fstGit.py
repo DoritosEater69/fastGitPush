@@ -1,8 +1,11 @@
 import os
+import sys
 import master as mstr
 import custom as cstm
 import subprocess as process
 
+
+path = str(sys.argv)
 
 #master
 def gitMaster(path):
@@ -11,25 +14,18 @@ def gitMaster(path):
 def gitCustom(path):
     cstm.init(path)
 
-def menu(path):
-    print("")
+def menu():
     print("")
     print("1. Master")
     print("2. Custom")
-    print("cd ...PATH - Locate GIT folder")
     print("")
     choice = raw_input("# ")
 
     if choice == "1":
         gitMaster(path)
-        menu("n")
+        menu()
     if choice == "2":
         gitCustom(path)
-        menu("n")
-    if choice == "cd":
-        path = raw_input("Path: ")
-        os.chdir(path)
-        process.call(["ls"])
-        menu(path)
+        menu()
 
-menu("n")
+menu()
