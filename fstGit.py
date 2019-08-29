@@ -8,7 +8,7 @@ def gitMaster():
     mstr.init()
 
 def gitCustom():
-    custom.init()
+    cstm.init()
 
 def menu():
     print("")

@@ -1,4 +1,5 @@
 import os
+from subprocess import check_output, STDOUT, CalledProcessError
 
 
 def push(message, path, branch):
