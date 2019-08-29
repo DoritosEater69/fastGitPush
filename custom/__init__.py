@@ -15,14 +15,14 @@ def push(message, path, branch):
     except CalledProcessError as error:
         errormsg = error.output, error.returncode, error.message
         print("error", errormsg)
-    #errormsg = error.output, error.returncode, error.Message
+    log = error.output, error.returncode, error.Message
 
-    if "src refspec" and "does not match any" in str(errormsg):
+    if "src refspec" and "does not match any" in str(log):
         print("WE GOT NO BRANCH HERE BOY")
         os.system("git checkout -b %s" % branch)
         os.system("git push origin %s" % branch)
 
-    if "A branch named" and "already exists" in str(errormsg):
+    if "A branch named" and "already exists" in str(log):
         print("WE ALREADY GOT THIS BRANCH HERE BOY")
         os.system("git checkout %s" % branch)
 
