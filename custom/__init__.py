@@ -27,6 +27,8 @@ def push(message, path, branch):
             print("WE ALREADY GOT THIS BRANCH HERE BOY")
             os.system("git checkout %s" % branch)
 
+        if "remote:" in str(errormsg):
+            print("###", errormsg)
             state = "pushed", path, "with commit Message: ", message, "to Branch: ", branch
             return state
 
