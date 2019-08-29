@@ -7,7 +7,6 @@ def push(message, path, branch):
     os.system("cd %s" % path)
     os.system("git add *")
     os.system("git commit -m %s" % message)
-    #process.check_output(["git", "push", "origin", branch], stderr=STDOUT)
 
     try:
         process.check_output(["git", "push", "origin", branch], stderr=STDOUT)
@@ -15,6 +14,8 @@ def push(message, path, branch):
     except CalledProcessError as error:
         errormsg = error.output, error.returncode, error.message
         print("error", errormsg)
+
+    process.check_output(["git", "push", "origin", branch], stderr=STDOUT)
     log = error.output, error.returncode, error.Message
 
     if "src refspec" and "does not match any" in str(log):
