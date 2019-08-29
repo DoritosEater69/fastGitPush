@@ -6,9 +6,6 @@ def push(message, path):
     os.system("git commit -m %s" % message)
     os.system("git push origin master")
 
-    state = "pushed", path, "with commit Message: ", message, "to Master"
-    return state
-
 def init(path):
     path = path
     print(path)
