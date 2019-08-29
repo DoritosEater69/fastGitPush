@@ -28,8 +28,8 @@ def push(message, path, branch):
             os.system("git checkout %s" % branch)
 
 
-            state = "pushed", path, "with commit Message: ", message, "to Branch: ", branch
-            return state
+        state = "pushed", path, "with commit Message: ", message, "to Branch: ", branch
+
         print(state)
 
 def init(path):
