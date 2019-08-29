@@ -5,7 +5,7 @@ import custom as cstm
 import subprocess as process
 
 
-path = str(sys.argv)
+path = str(sys.argv[1])
 
 #master
 def gitMaster(path):

@@ -10,11 +10,8 @@ def push(message, path):
     return state
 
 def init(path):
+    path = path
     print(path)
-    if len(path) > 1:
-        path = '/_backup/htdocs/git/_programming/tools/python/fastGitPush'
-    else:
-        path = path
     commitMsg = raw_input("Commit Message: ")
 
     for file in os.listdir(path):
