@@ -16,6 +16,8 @@ def push(message, path, branch):
 
     if "src refspec" and "does not match any" in str(errormsg):
         print("WE GOT NO BRANCH HERE BOY")
+        os.system("git checkout -b %s" % branch)
+        os.system("git push origin %s" % branch)
 
         state = "pushed", path, "with commit Message: ", message, "to Branch: ", branch
         return state
