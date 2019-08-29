@@ -30,6 +30,7 @@ def push(message, path, branch):
         colorred = "\033[1;31;40m]"
         colorwhite = "\033[0m 1;31;40m"
         highPath = colorred.format(str(path))
+        print(highPath)
         state = {highPath, colorwhite.format(str(branch)), colorred.format(str(message)), colorwhite.format("")}
         print(state)
     for content in state:
