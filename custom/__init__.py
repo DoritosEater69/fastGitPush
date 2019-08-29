@@ -32,7 +32,6 @@ def push(message, path, branch):
         state = {"pushed ", path, " with commit Message: ", message, " to Branch: ", branch}
 
     for content in state:
-        print(state)
         print(content)
 
 def init(path):
