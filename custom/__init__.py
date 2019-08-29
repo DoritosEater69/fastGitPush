@@ -31,6 +31,8 @@ def push(message, path, branch):
         colorwhite = "\\033[0m 1;31;40m"
         state = {"pushed ", path, " ", " with commit Message: ", message, " to Branch: ", branch}
 
+        for content in state:
+            print(content)
 
 def init(path):
     path = path
