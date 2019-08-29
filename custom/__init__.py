@@ -29,10 +29,10 @@ def push(message, path, branch):
 
         colorred = "\033[1;31;40m]"
         colorwhite = "\033[0m 1;31;40m"
-    state = {colorred.format(path), colorwhite.format(branch), colorred.format(message), colorwhite.format("")}
+        state = {colorred.format(path), colorwhite.format(branch), colorred.format(message), colorwhite.format("")}
 
-    for content in state:
-        print(content)
+        for content in state:
+            print(content)
 
 def init(path):
     path = path
