@@ -4,7 +4,7 @@ from subprocess import check_output, STDOUT, CalledProcessError
 
 
 def push(message, path, branch):
-
+    print("in")
     os.system("cd %s" % path)
     os.system("git add *")
     os.system("git commit -m %s" % message)
