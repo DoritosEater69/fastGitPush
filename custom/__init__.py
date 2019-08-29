@@ -8,24 +8,29 @@ def push(message, path, branch):
     os.system("cd %s" % path)
     os.system("git add *")
     os.system("git commit -m %s" % message)
+    process.check_output(["git", "push", "origin", branch], stderr=STDOUT)
+
     try:
         process.check_output(["git", "push", "origin", branch], stderr=STDOUT)
         print("Process: ", process)
     except CalledProcessError as error:
         errormsg = error.output, error.returncode, error.message
+        print("error", errormsg)
+    errormsg = error.output, error.returncode, error.Message
 
     if "src refspec" and "does not match any" in str(errormsg):
         print("WE GOT NO BRANCH HERE BOY")
         os.system("git checkout -b %s" % branch)
         os.system("git push origin %s" % branch)
-    if "src refspec" and "does not match any" in str(errormsg):
-        print("WE GOT THE SAME BRANCH HERE BOY, RENAME IT")
 
+    if "A branch named" and "already exists" in str(errormsg):
+        print("WE ALREADY GOT THIS BRANCH HERE BOY")
+        os.system("git checkout %s" % branch)
 
         state = "pushed", path, "with commit Message: ", message, "to Branch: ", branch
         return state
 
-def init():
+def init(path):
     path = '/Applications/MAMP/htdocs/git/_programming/tools/python/fastGitPush/'
     commitMsg = raw_input("Commit Message: ")
     branch = raw_input("Branch name")

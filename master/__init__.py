@@ -9,8 +9,12 @@ def push(message, path):
     state = "pushed", path, "with commit Message: ", message, "to Master"
     return state
 
-def init():
-    path = '/Applications/MAMP/htdocs/git/_programming/tools/python/fastGitPush/'
+def init(path):
+    print(path)
+    if len(path) > 1:
+        path = '/_backup/htdocs/git/_programming/tools/python/fastGitPush'
+    else:
+        path = path
     commitMsg = raw_input("Commit Message: ")
 
     for file in os.listdir(path):
