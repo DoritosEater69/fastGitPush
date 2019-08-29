@@ -27,8 +27,8 @@ def push(message, path, branch):
             print("WE ALREADY GOT THIS BRANCH HERE BOY")
             os.system("git checkout %s" % branch)
 
-            state = "pushed", path, "with commit Message: ", message, "to Branch: ", branch
-            return state
+    state = {path, message, branch}
+    print(state)
 
 def init(path):
     path = path
