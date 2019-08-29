@@ -18,12 +18,12 @@ def push(message, path, branch):
     # process.check_output(["git", "push", "origin", branch], stderr=STDOUT)
     # log = error.output, error.returncode, error.Message
 
-        if "src refspec" and "does not match any" in str(log):
+        if "src refspec" and "does not match any" in str(errormsg):
             print("WE GOT NO BRANCH HERE BOY")
             os.system("git checkout -b %s" % branch)
             os.system("git push origin %s" % branch)
 
-        if "A branch named" and "already exists" in str(log):
+        if "A branch named" and "already exists" in str(errormsg):
             print("WE ALREADY GOT THIS BRANCH HERE BOY")
             os.system("git checkout %s" % branch)
 
