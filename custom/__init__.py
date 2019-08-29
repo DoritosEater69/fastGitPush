@@ -27,10 +27,10 @@ def push(message, path, branch):
             print("WE ALREADY GOT THIS BRANCH HERE BOY")
             os.system("git checkout %s" % branch)
 
+        colorred = "\033[1;31;40m]"
+        colorwhite = "\\033[0m 1;31;40m"
+        state = {"pushed ", path, " ", " with commit Message: ", message, " to Branch: ", branch}
 
-        state = "pushed " + "\033[1;31;40m]" + path + "\\033[0m 1;31;40m" + " "+  " with commit Message: " + message + " to Branch: " + branch
-
-        print(state)
 
 def init(path):
     path = path
