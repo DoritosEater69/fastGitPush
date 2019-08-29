@@ -15,20 +15,20 @@ def push(message, path, branch):
         errormsg = error.output, error.returncode, error.message
         print("error", errormsg)
 
-    process.check_output(["git", "push", "origin", branch], stderr=STDOUT)
-    log = error.output, error.returncode, error.Message
+    # process.check_output(["git", "push", "origin", branch], stderr=STDOUT)
+    # log = error.output, error.returncode, error.Message
 
-    if "src refspec" and "does not match any" in str(log):
-        print("WE GOT NO BRANCH HERE BOY")
-        os.system("git checkout -b %s" % branch)
-        os.system("git push origin %s" % branch)
+        if "src refspec" and "does not match any" in str(log):
+            print("WE GOT NO BRANCH HERE BOY")
+            os.system("git checkout -b %s" % branch)
+            os.system("git push origin %s" % branch)
 
-    if "A branch named" and "already exists" in str(log):
-        print("WE ALREADY GOT THIS BRANCH HERE BOY")
-        os.system("git checkout %s" % branch)
+        if "A branch named" and "already exists" in str(log):
+            print("WE ALREADY GOT THIS BRANCH HERE BOY")
+            os.system("git checkout %s" % branch)
 
-        state = "pushed", path, "with commit Message: ", message, "to Branch: ", branch
-        return state
+            state = "pushed", path, "with commit Message: ", message, "to Branch: ", branch
+            return state
 
 def init(path):
     path = path
