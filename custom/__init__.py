@@ -4,7 +4,6 @@ from subprocess import check_output, STDOUT, CalledProcessError
 
 
 def push(message, path, branch):
-    print("in")
     os.system("cd %s" % path)
     os.system("git add *")
     os.system("git commit -m %s" % message)
@@ -16,7 +15,7 @@ def push(message, path, branch):
     except CalledProcessError as error:
         errormsg = error.output, error.returncode, error.message
         print("error", errormsg)
-    errormsg = error.output, error.returncode, error.Message
+    #errormsg = error.output, error.returncode, error.Message
 
     if "src refspec" and "does not match any" in str(errormsg):
         print("WE GOT NO BRANCH HERE BOY")
