@@ -28,7 +28,7 @@ def push(message, path, branch):
             os.system("git checkout %s" % branch)
 
 
-        state = "pushed " + "\033[1;31;40m Bright Green" + path + " with commit Message: " + message + " to Branch: " + branch
+        state = "pushed " + "\033[1;31;40m]" + path + " with commit Message: " + message + " to Branch: " + branch
 
         print(state)
 
