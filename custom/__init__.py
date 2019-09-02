@@ -42,3 +42,5 @@ def init(path):
     #if .git in Directory -> Do it / If not create git repo first
 
     push(commitMsg, path, branch)
+
+    return state
