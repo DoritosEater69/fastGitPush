@@ -22,6 +22,11 @@ def push(message, path):
             os.system("git checkout -b master-backup")
             os.system("git push origin master-backup")
             print("Please Merge the States together")
+            time.sleep(3)
+            os.system(clear)
+            repoURL = os.system("git config --get remote.origin.url")
+            print(repoURL)
+            quit()
         if choice == "N" or choice == "n":
             print("Exiting Program... ")
             time.sleep(2)
