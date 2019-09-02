@@ -18,7 +18,7 @@ def push(message, path):
         if "Updates were rejected because a pushed branch tip is behind its remote" in str(errormsg):
             print("Pushed Branch Tip Behind Remote")
             choice = raw_input("Local state will be saved into master-backup Branch! Y/N")
-            if choice == "Y" or choice == "y":
+            if choice.upper() == "Y":
                 os.system("git checkout -b master-backup")
                 os.system("git push origin master-backup")
                 print("Please Merge the States together if needed")
@@ -29,7 +29,7 @@ def push(message, path):
                 repoURL = os.system("git config --get remote.origin.url")
                 print(repoURL)
                 quit()
-            if choice == "N" or choice == "n":
+            if choice.upper() == "N":
                 print("Exiting Program... ")
                 time.sleep(2)
                 quit()
@@ -38,7 +38,7 @@ def push(message, path):
             repoURL = os.system("git config --get remote.origin.url")
             print(repoURL)
             raw_input("prompt")
-            os.system("git remote add origin repoURL")
+            os.system("git remote add origin %s" % repoURL)
             os.system("git pull origin master")
             os.system("git push origin master")
 
@@ -50,11 +50,5 @@ def init(path):
     path = path
     print(path)
     commitMsg = raw_input("Commit Message: ")
-
-    for file in os.listdir(path):
-        print(file)
-    #if .git in Directory -> Do it / If not create git repo first
-
     push(commitMsg, path)
-
     return push(commitMsg, path)
