@@ -7,9 +7,21 @@ import subprocess as process
 
 try:
     path = str(sys.argv[1])
+
+    #Later when Implemented as Terminal Command (sets path to current path)
+    #path = os.system(pwd)
+    # for file in os.listdir(path):
+    #     print(file)
+    #     if ".git" in file:
+    #         print("This is a GIT Repo")
+    #     else:
+    #         print("This is not a GIT Repo")
+
 except Exception as e:
     if "list index out of range" in str(e):
         print("usage: python fstGit.py PATH OF GIT FOLDER")
+        #Usage if added as terminal command
+        #print("usage: fstGit PATH OF GIT FOLDER/CURRENT Path")
         time.sleep(3)
         os.system("clear")
         quit()
