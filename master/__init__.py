@@ -27,12 +27,19 @@ def push(message, path):
             repoURL = os.system("git config --get remote.origin.url")
             print(repoURL)
             quit()
-
         if choice == "N" or choice == "n":
             print("Exiting Program... ")
             time.sleep(2)
             quit()
     os.system("git push origin master")
+
+    if "Updates were rejected because the remote contains work that you" in str(errormsg):
+        repoURL = os.system("git config --get remote.origin.url")
+        print(repoURL)
+        os.system("git remote add origin repoURL")
+        os.system("git pull origin master")
+        os.system("git push origin master")
+
 
     state = {"Folder: " + path, "Message: " + message, " to Branch: master"}
     return state
