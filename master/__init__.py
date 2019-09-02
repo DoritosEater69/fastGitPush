@@ -6,6 +6,9 @@ def push(message, path):
     os.system("git commit -m %s" % message)
     os.system("git push origin master")
 
+    state = {"Folder: " + path, "Message: " + message, " to Branch: " + branch}
+    return state
+
 def init(path):
     path = path
     print(path)
@@ -16,3 +19,5 @@ def init(path):
     #if .git in Directory -> Do it / If not create git repo first
 
     push(commitMsg, path)
+
+    return push(message, path)
