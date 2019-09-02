@@ -19,7 +19,8 @@ def gitMaster(path):
     mstr.init(path)
 
 def gitCustom(path):
-    print(cstm.init(path).state)
+    cstm.init(path)
+    cstm.state
 
 def menu():
     print("")
