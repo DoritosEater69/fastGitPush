@@ -16,7 +16,7 @@ except Exception as e:
 
 #master
 def gitMaster(path):
-    mstr.init(path)
+    print(mstr.init(path))
 
 def gitCustom(path):
     print(cstm.init(path))

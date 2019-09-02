@@ -20,4 +20,4 @@ def init(path):
 
     push(commitMsg, path)
 
-    return push(message, path)
+    return push(commitMsg, path)
