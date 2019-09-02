@@ -29,7 +29,6 @@ def push(message, path, branch):
 
     state = {"Pushed to: ", path, message, branch}
     return state
-    state = push(message, path, branch)
 
 def init(path):
     path = path
@@ -42,5 +41,7 @@ def init(path):
         print(file)
     #if .git in Directory -> Do it / If not create git repo first
 
-    push(commitMsg, path, branch)
+
+    return push(commitMsg, path, branch)
+
 
