@@ -36,6 +36,7 @@ def push(message, path):
     if "Updates were rejected because the remote contains work that you" in str(errormsg):
         repoURL = os.system("git config --get remote.origin.url")
         print(repoURL)
+        raw_input("prompt")
         os.system("git remote add origin repoURL")
         os.system("git pull origin master")
         os.system("git push origin master")
