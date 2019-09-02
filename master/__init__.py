@@ -21,8 +21,9 @@ def push(message, path):
         if choice == "Y" or choice == "y":
             os.system("git checkout -b master-backup")
             os.system("git push origin master-backup")
-            print("Please Merge the States together")
+            print("Please Merge the States together if needed")
             time.sleep(3)
+            os.system("git checkout master")
             os.system("clear")
             repoURL = os.system("git config --get remote.origin.url")
             print(repoURL)
