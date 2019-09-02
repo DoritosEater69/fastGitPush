@@ -43,4 +43,3 @@ def init(path):
 
     push(commitMsg, path, branch)
 
-    return state
