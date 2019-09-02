@@ -20,7 +20,7 @@ def gitMaster(path):
 
 def gitCustom(path):
     cstm.init(path)
-    print(state)
+
 
 def menu():
     print("")
