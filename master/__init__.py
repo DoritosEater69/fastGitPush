@@ -27,6 +27,7 @@ def push(message, path):
             repoURL = os.system("git config --get remote.origin.url")
             print(repoURL)
             quit()
+
         if choice == "N" or choice == "n":
             print("Exiting Program... ")
             time.sleep(2)
