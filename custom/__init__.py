@@ -27,8 +27,13 @@ def push(message, path, branch):
             print("WE ALREADY GOT THIS BRANCH HERE BOY")
             os.system("git checkout %s" % branch)
 
+        if "Total" in str(errormsg):
+            print("SUCCESSFUL!")
+
     state = {"Folder: " + path, "Message: " + message, " to Branch: " + branch}
     return state
+
+
 
 def init(path):
     path = path
