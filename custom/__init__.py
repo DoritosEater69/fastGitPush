@@ -22,15 +22,15 @@ def push(message, path, branch):
             print("WE GOT NO BRANCH HERE BOY")
             os.system("git checkout -b %s" % branch)
             os.system("git push origin %s" % branch)
-            os.system("git checkout master")
 
         if "A branch named" and "already exists" in str(errormsg):
             print("WE ALREADY GOT THIS BRANCH HERE BOY")
             os.system("git checkout %s" % branch)
-            os.system("git checkout master")
 
-            state = "pushed", path, "with commit Message: ", message, "to Branch: ", branch
-            return state
+        os.system("git checkout -b %s" % branch)
+        os.system("git push origin %s" % branch)
+        state = "pushed", path, "with commit Message: ", message, "to Branch: ", branch
+        return state
 
 def init(path):
     path = path
