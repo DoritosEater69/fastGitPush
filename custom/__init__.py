@@ -29,7 +29,6 @@ def push(message, path, branch):
 
     state = {"Pushed to: ", path, message, branch}
     return state
-    print(state)
 
 def init(path):
     path = path
