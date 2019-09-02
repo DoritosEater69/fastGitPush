@@ -22,6 +22,7 @@ def gitCustom(path):
     print(cstm.init(path))
 
 def menu():
+    os.system("git checkout master")
     print("")
     print("1. Master")
     print("2. Custom")
