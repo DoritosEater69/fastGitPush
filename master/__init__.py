@@ -16,7 +16,7 @@ def push(message, path):
         print("error", errormsg)
 
         if "Updates were rejected because a pushed branch tip is behind its remote" in str(errormsg):
-            print("PUSHED BRANCH TIP BEHIND REMOTE")
+            print("Pushed Branch Tip Behind Remote")
             choice = raw_input("Local state will be saved into master-backup Branch! Y/N")
             if choice == "Y" or choice == "y":
                 os.system("git checkout -b master-backup")
