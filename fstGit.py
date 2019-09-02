@@ -10,7 +10,7 @@ try:
 except Exception as e:
     if "list index out of range" in str(e):
         print("usage: python fstGit.py PATH OF GIT FOLDER")
-        time.sleep(4)
+        time.sleep(3)
         os.system("clear")
         quit()
 
@@ -20,6 +20,7 @@ def gitMaster(path):
 
 def gitCustom(path):
     cstm.init(path)
+    print(state)
 
 def menu():
     print("")

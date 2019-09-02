@@ -5,7 +5,12 @@
 
 Usage:
 
-python fstGit.py [PATH TO GIT FOLDER LOCATION]
+python fstGit.py [PATH TO GIT FOLDER]
+
+
+If program is installed for Terminal-Command-Use:
+fstGit [PATH TO GIT FOLDER]
+
 
 More Stuff to add:
 Error Workarounds
