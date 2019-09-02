@@ -23,7 +23,7 @@ def push(message, path):
             os.system("git push origin master-backup")
             print("Please Merge the States together")
             time.sleep(3)
-            os.system(clear)
+            os.system("clear")
             repoURL = os.system("git config --get remote.origin.url")
             print(repoURL)
             quit()
