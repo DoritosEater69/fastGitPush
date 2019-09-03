@@ -17,7 +17,7 @@ def autoBranch():
             os.system("git checkout auto-master")
 
 
-def commit(path):
+def commit():
     try:
         status = process.check_output(["git", "status"], stderr=STDOUT)
         if "modified" in str(status):
@@ -42,4 +42,4 @@ def init(path):
     path = path
     print(path)
     os.system("cd %s" % path)
-    commit(path)
+    commit()
