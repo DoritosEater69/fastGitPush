@@ -4,22 +4,38 @@ import subprocess as process
 from subprocess import check_output, STDOUT, CalledProcessError
 
 
-def push(path):
-    print("#")
-
-def commit(path):
+def push():
     try:
-        gitAnswer = process.check_output(["git", "status"], stderr=STDOUT)
-        print(str(gitAnswer))
-        if "modified" in str(gitAnswer):
+        os.system("git push origin auto-master")
+        print("Files pushed to auto-master")
+    except CalledProcessError as error:
+        errormsg = error.output, error.returncode, error.message
+        print("error", errormsg)
+
+
+def autoBranch():
+    try:
+        os.system("git checkout -b auto-master")
+    except CalledProcessError as error:
+        errormsg = error.output, error.returncode, error.message
+        print("error", errormsg)
+        if "A branch named" in str(errormsg) and "already exists" in str(errormsg):
+            os.system("git checkout -f auto-master")
+
+
+def commit():
+    try:
+        status = process.check_output(["git", "status"], stderr=STDOUT)
+        if "modified" in str(status):
             print("Somethings modified")
-            print(gitAnswer)
+            print(status)
+            autoBranch()
             os.system("git add *")
-            os.system("git commit -m %s ")
-        # if "Changes not staged for commit" in str(process):
-        #     print("Something changed")
-        #     os.system("git add *")
-        #     os.system("git commit -m %s" )
+            os.system("git commit -m %s" % "auto-master%20pushed%20-%20please%20merge")
+            push()
+        else:
+            print("No modified Data found")
+            quit()
     except CalledProcessError as error:
         errormsg = error.output, error.returncode, error.message
         print("error", errormsg)
@@ -34,4 +50,5 @@ def init(path):
     print("")
     path = path
     print(path)
-    commit(path)
+    os.system("cd %s" % path)
+    commit()
