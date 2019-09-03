@@ -3,6 +3,7 @@ import time
 import sys
 import master as mstr
 import custom as cstm
+import watcher as wtch
 import subprocess as process
 
 try:
@@ -33,11 +34,15 @@ def gitMaster(path):
 def gitCustom(path):
     print(cstm.init(path))
 
+def gitWatch(path):
+    wtch.init(path)
+
 def menu():
     os.system("git checkout master")
     print("")
     print("1. Master")
     print("2. Custom")
+    print("3. Watcher")
     print("")
     choice = raw_input("# ")
 
@@ -46,6 +51,9 @@ def menu():
         menu()
     if choice == "2":
         gitCustom(path)
+        menu()
+    if choice == "3":
+        gitWatch(path)
         menu()
 
 menu()
