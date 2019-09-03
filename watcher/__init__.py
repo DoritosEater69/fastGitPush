@@ -5,21 +5,28 @@ from subprocess import check_output, STDOUT, CalledProcessError
 
 
 def push(path):
-    print("#")
+    os.system("git push origin auto-master")
+
+def autoBranch():
+    try:
+        os.system("git checkout -b auto-master")
+    except CalledProcessError as error:
+        errormsg = error.output, error.returncode, error.message
+        print("error", errormsg)
+        if "A branch named" in str(errormsg) and "already exists" in str(errormsg):
+            os.system("git checkout auto-master")
+
 
 def commit(path):
     try:
-        gitAnswer = process.check_output(["git", "status"], stderr=STDOUT)
-        print(str(gitAnswer))
-        if "modified" in str(gitAnswer):
+        status = process.check_output(["git", "status"], stderr=STDOUT)
+        if "modified" in str(status):
             print("Somethings modified")
-            print(gitAnswer)
+            print(status)
             os.system("git add *")
-            os.system("git commit -m %s ")
-        # if "Changes not staged for commit" in str(process):
-        #     print("Something changed")
-        #     os.system("git add *")
-        #     os.system("git commit -m %s" )
+            autoBranch()
+            os.system("git commit -m %s" % 'auto-master%20pushed%20-%20please%20merge')
+            push()
     except CalledProcessError as error:
         errormsg = error.output, error.returncode, error.message
         print("error", errormsg)
