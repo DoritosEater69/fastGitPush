@@ -11,8 +11,6 @@ def push():
     except CalledProcessError as error:
         errormsg = error.output, error.returncode, error.message
         print("error", errormsg)
-        if "A branch named" in str(errormsg) and "already exists" in str(errormsg):
-            os.system("git checkout -f auto-master")
 
 
 def autoBranch():
@@ -31,8 +29,8 @@ def commit():
         if "modified" in str(status):
             print("Somethings modified")
             print(status)
-            os.system("git add *")
             autoBranch()
+            os.system("git add *")
             os.system("git commit -m %s" % "auto-master%20pushed%20-%20please%20merge")
             push()
         else:
