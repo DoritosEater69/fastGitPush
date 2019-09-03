@@ -35,6 +35,9 @@ def commit():
             autoBranch()
             os.system("git commit -m %s" % "auto-master%20pushed%20-%20please%20merge")
             push()
+        else:
+            print("No modified Data found")
+            quit()
     except CalledProcessError as error:
         errormsg = error.output, error.returncode, error.message
         print("error", errormsg)
