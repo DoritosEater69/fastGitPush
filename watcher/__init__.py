@@ -1,6 +1,7 @@
 import os
 import watchdog
 import time
+import random
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import subprocess as process
@@ -42,6 +43,7 @@ class Handler(FileSystemEventHandler):
                 push()
 
 def push():
+    rand = random.randint(1,9)
     try:
         os.system("git push origin auto-master")
         print("Pushing files to auto-master...")
@@ -52,6 +54,8 @@ def push():
     status = process.check_output(["git", "push", "origin", "auto-master"], stderr=STDOUT)
     if "Everything up-to-date" in str(status):
         print("####ERROR")
+        os.system("git checkout -f -b auto-master%s" % rand)
+        #Merge / New Branch
 
 
 def autoBranch():
