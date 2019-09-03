@@ -25,7 +25,7 @@ def commit(path):
             print(status)
             os.system("git add *")
             autoBranch()
-            os.system("git commit -m %s" % 'auto-master%20pushed%20-%20please%20merge')
+            os.system("git commit -m %s" % "auto-master%20pushed%20-%20please%20merge")
             push()
     except CalledProcessError as error:
         errormsg = error.output, error.returncode, error.message
