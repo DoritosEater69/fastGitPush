@@ -4,7 +4,7 @@ import subprocess as process
 from subprocess import check_output, STDOUT, CalledProcessError
 
 
-def push(path):
+def push():
     os.system("git push origin auto-master")
 
 def autoBranch():
@@ -41,4 +41,5 @@ def init(path):
     print("")
     path = path
     print(path)
+    os.system("cd %s" % path)
     commit(path)
