@@ -5,7 +5,15 @@ from subprocess import check_output, STDOUT, CalledProcessError
 
 
 def push():
-    os.system("git push origin auto-master")
+    try:
+        os.system("git push origin auto-master")
+        print("Files pushed to auto-master")
+    except CalledProcessError as error:
+        errormsg = error.output, error.returncode, error.message
+        print("error", errormsg)
+        if "A branch named" in str(errormsg) and "already exists" in str(errormsg):
+            os.system("git checkout -f auto-master")
+
 
 def autoBranch():
     try:
