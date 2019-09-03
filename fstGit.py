@@ -35,7 +35,7 @@ def gitCustom(path):
     print(cstm.init(path))
 
 def gitWatch(path):
-    wtch.init(path)
+    wtch.init()
 
 def menu():
     os.system("git checkout master")

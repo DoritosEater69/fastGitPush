@@ -1,8 +1,45 @@
 import os
+import watchdog
 import time
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
 import subprocess as process
+import sys
 from subprocess import check_output, STDOUT, CalledProcessError
 
+
+
+class Watcher():
+    path = str(sys.argv[1])
+    def __init__(self):
+        self.observer = Observer()
+
+    def run(self):
+        event_handler = Handler()
+        self.observer.schedule(event_handler, self.path, recursive=True)
+        self.observer.start()
+        try:
+            while True:
+                time.sleep(2)
+        except:
+            self.observer.stop()
+            print("Error!")
+
+        self.observer.join()
+
+
+class Handler(FileSystemEventHandler):
+        @staticmethod
+        def on_any_event(event):
+            if event.is_directory:
+                return None
+
+            elif event.event_type == 'modified':
+                print("STUFF MODIFIED")
+                os.system("git status")
+                commit()
+                autoBranch()
+                push()
 
 def push():
     try:
@@ -41,7 +78,7 @@ def commit():
         errormsg = error.output, error.returncode, error.message
         print("error", errormsg)
 
-def init(path):
+def init():
     print("")
     print("")
     print("Auto Watcher (Auto-Branch)")
@@ -49,7 +86,5 @@ def init(path):
     print("After you are done with your work, everything needs to get merged together.")
     print("")
     print("")
-    path = path
-    print(path)
-    os.system("cd %s" % path)
-    commit()
+    w = Watcher()
+    w.run()
