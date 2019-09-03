@@ -8,6 +8,7 @@ def push():
     try:
         os.system("git push origin auto-master")
         print("Files pushed to auto-master")
+        os.system("gi status")
     except CalledProcessError as error:
         errormsg = error.output, error.returncode, error.message
         print("error", errormsg)
