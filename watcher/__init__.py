@@ -49,8 +49,9 @@ def push():
     except CalledProcessError as error:
         errormsg = error.output, error.returncode, error.message
         print("error", errormsg)
-        if "Everything up-to-date" in str(errormsg):
-            print("####ERROR")
+    status = process.check_output(["git", "push", "origin", "auto-master"], stderr=STDOUT)
+    if "Everything up-to-date" in str(status):
+        print("####ERROR")
 
 
 def autoBranch():
