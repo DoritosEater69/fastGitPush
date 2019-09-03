@@ -14,8 +14,7 @@ def autoBranch():
         errormsg = error.output, error.returncode, error.message
         print("error", errormsg)
         if "A branch named" in str(errormsg) and "already exists" in str(errormsg):
-            os.system("git checkout auto-master")
-            push()
+            os.system("git checkout -f auto-master")
 
 
 def commit():
