@@ -28,6 +28,13 @@ class Watcher():
 
         self.observer.join()
 
+def sliceEvent(event):
+    arr = []
+    print(event)
+    for value in str(event):
+        arr.append(value)
+    print(arr)
+
 
 #Initializes Watcher via watchdog Module
 class Handler(FileSystemEventHandler):
@@ -39,10 +46,7 @@ class Handler(FileSystemEventHandler):
 #If File was modified -> Gets name of file
 #-> Trys Commit -> Branch -> Push
             elif event.event_type == 'modified':
-                arr = []
-                print(event)
-                arr.append(event)
-                print(arr)
+                sliceEvent(event)
                 time.sleep(4)
                 print("STUFF MODIFIED")
                 os.system("git status")
