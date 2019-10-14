@@ -21,7 +21,7 @@ class Watcher():
         self.observer.start()
         try:
             while True:
-                time.sleep(2)
+                time.sleep(15)
         except:
             self.observer.stop()
             print("Error!")
