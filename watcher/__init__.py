@@ -68,9 +68,9 @@ def push():
         print("error", errormsg)
     status = process.check_output(["git", "push", "origin", "auto-master"], stderr=STDOUT)
     if "Everything up-to-date" in str(status):
-        print("####ERROR")
-        os.system("git checkout -f -b auto-master%s" % rand)
-        #Merge / New Branch
+        randBranch = os.system("git checkout -f -b auto-master%s" % rand)
+        os.system("git push origin %s" % randBranch)
+#Merge / New Branch
 
 
 def autoBranch():
