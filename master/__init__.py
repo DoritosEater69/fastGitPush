@@ -14,12 +14,14 @@ def push(message, path):
         push = process.check_output(["git", "push", "origin", "master"], stderr=STDOUT)
         print("Process: ", push)
 
+#If Everything was pushed OR Master = Master already:
         if "Everything up-to-date" in str(push):
             os.system("clear")
             print("Everything up to date... quitting Program")
             time.sleep(3)
             quit()
 
+#If Error is being catched
     except CalledProcessError as error:
         os.system("clear")
         errormsg = error.output, error.returncode, error.message
