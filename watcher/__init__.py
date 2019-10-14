@@ -58,7 +58,7 @@ class Handler(FileSystemEventHandler):
                 push()
 
 def push():
-    rand = random.randint(1,9)
+    rand = random.randint(1,100)
     try:
         os.system("git push origin auto-master")
         print("Pushing files to auto-master...")
