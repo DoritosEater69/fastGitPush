@@ -1,29 +1,29 @@
 # fastGitPush
 
 
-<h1>Tool to type less Stuff for GIT pushs</h1>
-Uses watchdog Module
-Done for OS
+<h2>Tool to type less Stuff for GIT pushs</h2>
+Uses watchdog Module<br>
+Done for OS<br><br>
 
 
-Methods:
-<b>gitMaster(path)</b>
-<b>gitCustom(path)</b>
-<b>gitWatch(path)</b>
+Methods:<br>
+<b>gitMaster(path)</b><br>
+<b>gitCustom(path)</b><br>
+<b>gitWatch(path)</b><br><br>
 
-gitMaster pushes Commit to Master Branch
-gitCustom pushes Commit to Custom Branch
-gitWatch watches Path for Changes - Pushes Changes after every Change in the Path
-
-
-<h2>Basic usage:<h2>
-<b>Python File</b>
-'python fastGitPush.py [PATH OF GIT FOLDER]'
-
-<b>Terminal Command</b>
-'fstgitpsh [PATH OF GIT FOLDER]'
+gitMaster pushes Commit to Master Branch<br>
+gitCustom pushes Commit to Custom Branch<br>
+gitWatch watches Path for Changes - Pushes Changes after every Change in the Path<br><br>
 
 
-[] - Installation File
-[] - Set File to Terminal Command
-[] - Bugfixing / Catch Exceptions
+<h2>Basic usage:<h2><br>
+<b>Python File</b><br>
+'python fastGitPush.py [PATH OF GIT FOLDER]'<br>
+
+<b>Terminal Command</b><br>
+'fstgitpsh [PATH OF GIT FOLDER]'<br><br>
+
+
+[] - Installation File<br>
+[] - Set File to Terminal Command<br>
+[] - Bugfixing / Catch Exceptions<br>
