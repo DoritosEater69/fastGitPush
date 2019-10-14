@@ -58,7 +58,7 @@ def push(message, path):
 
     os.system("clear")
     state = {"Folder: " , path, "Message: " , message, " to Branch: master"}
-    return str(state)
+    return ''.join(state)
 
 def init(path):
     path = path
