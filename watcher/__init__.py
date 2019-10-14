@@ -29,13 +29,13 @@ class Watcher():
         self.observer.join()
 
 def sliceEvent(event):
-    arr = []
-    new = str(event).split(" ")
-    print(new)
-    for value in new:
-        arr.append(value)
-    print(arr[1])
-
+    fullEvent = []
+#Event set to String and Splitted by space -> Path of modified File sliced out
+    split = str(event).split(" ")
+    for value in split:
+        fullEvent.append(value)
+    #print(fullEvent[1])
+    return fullEvent[1]
 
 #Initializes Watcher via watchdog Module
 class Handler(FileSystemEventHandler):
@@ -49,7 +49,7 @@ class Handler(FileSystemEventHandler):
             elif event.event_type == 'modified':
                 sliceEvent(event)
                 time.sleep(4)
-                print("STUFF MODIFIED")
+                print(" MODIFIED")
                 os.system("git status")
                 commit()
                 autoBranch()
