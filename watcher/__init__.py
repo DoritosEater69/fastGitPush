@@ -34,7 +34,7 @@ def sliceEvent(event):
     print(new)
     for value in new:
         arr.append(value)
-    print(arr)
+    print(arr[1])
 
 
 #Initializes Watcher via watchdog Module
