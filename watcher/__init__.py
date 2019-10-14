@@ -30,6 +30,7 @@ class Watcher():
 
 def sliceEvent(event):
     arr = []
+    str(event) .split()
     print(event)
     for value in str(event):
         arr.append(value)
