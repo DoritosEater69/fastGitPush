@@ -96,8 +96,8 @@ def commit(eventFiles):
             os.system("git commit -m %s" % "auto-pushed_please_merge")
             push()
         else:
-            print("No modified Data found")
-            quit()
+            print("No modified Data found. Keep on working!")
+            print("use control + c to quit the Program")
     except CalledProcessError as error:
         errormsg = error.output, error.returncode, error.message
         print("error", errormsg)
