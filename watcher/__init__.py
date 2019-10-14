@@ -36,8 +36,13 @@ class Handler(FileSystemEventHandler):
             if event.is_directory:
                 return None
 
+#If File was modified -> Gets name of file
+#-> Trys Commit -> Branch -> Push
             elif event.event_type == 'modified':
+                arr = []
                 print(event)
+                arr.append(event)
+                print(arr)
                 time.sleep(4)
                 print("STUFF MODIFIED")
                 os.system("git status")
