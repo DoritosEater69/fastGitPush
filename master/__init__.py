@@ -13,7 +13,9 @@ def push(message, path):
     try:
         process.check_output(["git", "push", "origin", "master"], stderr=STDOUT)
         print("Process: ", process)
-        time.sleep(3)
+        test = process.check_output(["git", "push", "origin", "master"], stderr=STDOUT)
+        print("Process: ", test)
+        time.sleep(5)
     except CalledProcessError as error:
         os.system("clear")
         errormsg = error.output, error.returncode, error.message
