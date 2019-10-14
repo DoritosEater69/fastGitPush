@@ -11,6 +11,7 @@ from subprocess import check_output, STDOUT, CalledProcessError
 
 #Initializes Watcher via watchdog Module
 class Watcher():
+    os.system("clear")
     path = str(sys.argv[1])
     def __init__(self):
         self.observer = Observer()
@@ -46,12 +47,14 @@ class Handler(FileSystemEventHandler):
 #If File was modified -> Gets name of file
 #-> Trys Commit -> Branch -> Push
             elif event.event_type == 'modified':
-                print(sliceEvent(event))
+                eventFiles = sliceEvent(event)
+                print("File ", eventFiles, " was modified.")
                 time.sleep(4)
-                print(" MODIFIED")
-                os.system("git status")
-                commit()
+                os.system("clear")
+                commit(eventFiles)
+                os.system("clear")
                 autoBranch()
+                os.system("clear")
                 push()
 
 def push():
@@ -80,13 +83,13 @@ def autoBranch():
             os.system("git checkout -f auto-master")
 
 
-def commit():
+def commit(eventFiles):
     try:
         status = process.check_output(["git", "status"], stderr=STDOUT)
         print(str(status))
         time.sleep(4)
         if "modified" in str(status):
-            print("Somethings modified")
+            print(eventFiles, " modified")
             print(status)
             autoBranch()
             os.system("git add *")
