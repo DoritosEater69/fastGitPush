@@ -9,7 +9,7 @@ import sys
 from subprocess import check_output, STDOUT, CalledProcessError
 
 
-
+#
 class Watcher():
     path = str(sys.argv[1])
     def __init__(self):
@@ -76,7 +76,7 @@ def commit():
             print(status)
             autoBranch()
             os.system("git add *")
-            os.system("git commit -m %s" % "auto-master%20pushed%20-%20please%20merge")
+            os.system("git commit -m %s" % "auto-pushed_please_merge")
             push()
         else:
             print("No modified Data found")

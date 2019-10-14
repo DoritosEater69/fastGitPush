@@ -27,7 +27,7 @@ except Exception as e:
         os.system("clear")
         quit()
 
-#master
+
 def gitMaster(path):
     print(mstr.init(path))
 
