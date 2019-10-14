@@ -71,6 +71,7 @@ def autoBranch():
 def commit():
     try:
         status = process.check_output(["git", "status"], stderr=STDOUT)
+        print(str(status))
         if "modified" in str(status):
             print("Somethings modified")
             print(status)
