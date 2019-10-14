@@ -13,6 +13,7 @@ def push(message, path):
     try:
         process.check_output(["git", "push", "origin", "master"], stderr=STDOUT)
         print("Process: ", process)
+        time.sleep(3)
     except CalledProcessError as error:
         os.system("clear")
         errormsg = error.output, error.returncode, error.message
@@ -57,7 +58,7 @@ def push(message, path):
                 quit()
 
     os.system("clear")
-    state = ["Folder: " , path, "Message: " , message, " to Branch: master"]
+    state = ["Folder: " , path, " Message: " , message, " to Branch: master"]
     return ''.join(state)
 
 def init(path):
