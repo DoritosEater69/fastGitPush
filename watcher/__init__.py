@@ -9,7 +9,7 @@ import sys
 from subprocess import check_output, STDOUT, CalledProcessError
 
 
-#
+#Initializes Watcher via watchdog Module
 class Watcher():
     path = str(sys.argv[1])
     def __init__(self):
@@ -29,6 +29,7 @@ class Watcher():
         self.observer.join()
 
 
+#Initializes Watcher via watchdog Module
 class Handler(FileSystemEventHandler):
         @staticmethod
         def on_any_event(event):
@@ -36,6 +37,8 @@ class Handler(FileSystemEventHandler):
                 return None
 
             elif event.event_type == 'modified':
+                print(event)
+                time.sleep(4)
                 print("STUFF MODIFIED")
                 os.system("git status")
                 commit()
