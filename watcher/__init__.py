@@ -59,8 +59,9 @@ class Handler(FileSystemEventHandler):
 
 def push():
     rand = random.randint(1,100)
+    randBranch = os.system("git checkout -f -b auto-master%s" % rand)
     try:
-        os.system("git push origin auto-master")
+        os.system("git push origin %s" % randBranch)
         print("Pushing files to auto-master...")
         os.system("git status")
     except CalledProcessError as error:
@@ -68,7 +69,6 @@ def push():
         print("error", errormsg)
     status = process.check_output(["git", "push", "origin", "auto-master"], stderr=STDOUT)
     if "Everything up-to-date" in str(status):
-        randBranch = os.system("git checkout -f -b auto-master%s" % rand)
         os.system("git push origin %s" % randBranch)
 #Merge / New Branch
 
