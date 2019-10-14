@@ -72,6 +72,7 @@ def commit():
     try:
         status = process.check_output(["git", "status"], stderr=STDOUT)
         print(str(status))
+        time.sleep(4)
         if "modified" in str(status):
             print("Somethings modified")
             print(status)
