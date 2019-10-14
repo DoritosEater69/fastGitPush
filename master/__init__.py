@@ -56,7 +56,7 @@ def push(message, path):
                 time.sleep(2)
                 quit()
 
-
+    os.system("clear")
     state = {"Folder: " + path, "Message: " + message, " to Branch: master"}
     return state
 
