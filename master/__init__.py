@@ -11,11 +11,14 @@ def push(message, path):
     os.system("git commit -m %s" % message)
 
     try:
-        process.check_output(["git", "push", "origin", "master"], stderr=STDOUT)
-        print("Process: ", process)
-        test = process.check_output(["git", "push", "origin", "master"], stderr=STDOUT)
-        print("Process: ", test)
-        time.sleep(5)
+        push = process.check_output(["git", "push", "origin", "master"], stderr=STDOUT)
+        print("Process: ", push)
+
+        if "Everything up-to-date" in str(push):
+            print("Everything up to date... quitting Program")
+            os.system("clear")
+            quit()
+
     except CalledProcessError as error:
         os.system("clear")
         errormsg = error.output, error.returncode, error.message

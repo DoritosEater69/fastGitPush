@@ -7,6 +7,7 @@ import watcher as wtch
 import subprocess as process
 
 try:
+    os.system("clear")
     path = str(sys.argv[1])
 
     #Later when Implemented as Terminal Command (sets path to current path)
@@ -19,6 +20,7 @@ try:
     #         print("This is not a GIT Repo")
 
 except Exception as e:
+    os.system("clear")
     if "list index out of range" in str(e):
         print("usage: python fstGit.py PATH OF GIT FOLDER")
         #Usage if added as terminal command
@@ -38,6 +40,7 @@ def gitWatch(path):
     wtch.init()
 
 def menu():
+    os.system("clear")
     os.system("git checkout master")
     print("")
     print("1. Master")
