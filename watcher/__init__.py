@@ -98,6 +98,8 @@ def commit(eventFiles):
         else:
             print("No modified Data found. Keep on working!")
             print("use control + c to quit the Program")
+            quit()
+            exit()
     except CalledProcessError as error:
         errormsg = error.output, error.returncode, error.message
         print("error", errormsg)
