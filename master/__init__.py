@@ -15,8 +15,9 @@ def push(message, path):
         print("Process: ", push)
 
         if "Everything up-to-date" in str(push):
-            print("Everything up to date... quitting Program")
             os.system("clear")
+            print("Everything up to date... quitting Program")
+            time.sleep(3)
             quit()
 
     except CalledProcessError as error:
