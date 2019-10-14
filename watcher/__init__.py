@@ -43,11 +43,10 @@ class Handler(FileSystemEventHandler):
         def on_any_event(event):
             if event.is_directory:
                 return None
-
 #If File was modified -> Gets name of file
 #-> Trys Commit -> Branch -> Push
             elif event.event_type == 'modified':
-                sliceEvent(event)
+                print(sliceEvent(event))
                 time.sleep(4)
                 print(" MODIFIED")
                 os.system("git status")
