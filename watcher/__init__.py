@@ -32,7 +32,7 @@ def sliceEvent(event):
     arr = []
     new = str(event).split(" ")
     print(new)
-    for value in str(event):
+    for value in new:
         arr.append(value)
     print(arr)
 
