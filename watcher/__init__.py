@@ -75,6 +75,7 @@ def autoBranch():
     rand = random.randint(1,100)
     try:
         randBranch = os.system("git checkout -b auto-master%s" % rand)
+        print(randBranch)
         return randBranch
     except CalledProcessError as error:
         errormsg = error.output, error.returncode, error.message
@@ -82,6 +83,7 @@ def autoBranch():
         if "A branch named" in str(errormsg) and "already exists" in str(errormsg):
             randBranch = os.system("git checkout -b auto-master%s" % rand)
             return randBranch
+            print(randBranch)
 
 
 def commit(eventFiles):
