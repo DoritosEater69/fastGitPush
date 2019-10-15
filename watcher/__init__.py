@@ -57,9 +57,7 @@ class Handler(FileSystemEventHandler):
                 os.system("clear")
                 push()
 
-def push():
-    rand = random.randint(1,100)
-    randBranch = os.system("git checkout -f -b auto-master%s" % rand)
+def push(randBranch):
     try:
         os.system("git push origin %s" % randBranch)
         print("Pushing files to auto-master...")
@@ -74,13 +72,18 @@ def push():
 
 
 def autoBranch():
+    rand = random.randint(1,100)
     try:
-        os.system("git checkout -b auto-master")
+        randBranch = "auto-master%s" % rand
+        fullBranch = os.system("git checkout -b %s" % randBranch)
+        return randBranch
     except CalledProcessError as error:
         errormsg = error.output, error.returncode, error.message
         print("error", errormsg)
         if "A branch named" in str(errormsg) and "already exists" in str(errormsg):
-            os.system("git checkout -f auto-master")
+            randBranch = "auto-master%s" % rand
+            fullBranch = os.system("git checkout -b %s" % randBranch)
+            return randBranch
 
 
 def commit(eventFiles):
@@ -91,10 +94,9 @@ def commit(eventFiles):
         if "modified" in str(status):
             print(eventFiles, " modified")
             print(status)
-            autoBranch()
             os.system("git add *")
             os.system("git commit -m %s" % "auto-pushed_please_merge")
-            push()
+            push(autoBranch())
         else:
             print("No modified Data found. Keep on working!")
             print("use control + c to quit the Program")
