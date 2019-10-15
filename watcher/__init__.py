@@ -57,7 +57,7 @@ class Handler(FileSystemEventHandler):
                 os.system("clear")
                 push()
 
-def push():
+def push(randBranch):
     try:
         os.system("git push origin %s" % randBranch)
         print("Pushing files to auto-master...")
@@ -93,7 +93,7 @@ def commit(eventFiles):
             autoBranch()
             os.system("git add *")
             os.system("git commit -m %s" % "auto-pushed_please_merge")
-            push()
+            push(randBranch)
         else:
             print("No modified Data found. Keep on working!")
             print("use control + c to quit the Program")
