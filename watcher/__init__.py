@@ -94,11 +94,9 @@ def commit(eventFiles):
         if "modified" in str(status):
             print(eventFiles, " modified")
             print(status)
-            print("Test: ",autoBranch())
-            time.sleep(4)
             os.system("git add *")
             os.system("git commit -m %s" % "auto-pushed_please_merge")
-            push()
+            push(autoBranch())
         else:
             print("No modified Data found. Keep on working!")
             print("use control + c to quit the Program")
