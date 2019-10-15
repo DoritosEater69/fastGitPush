@@ -29,6 +29,14 @@ class Watcher():
 
         self.observer.join()
 
+    def stop(self):
+        event_handler = Handler()
+        self.observer.schedule(event_handler, self.path, recursive=True)
+        self.observer.stop()
+        self.observer.join()
+
+
+
 def sliceEvent(event):
     fullEvent = []
 #Event set to String and Splitted by space -> Path of modified File sliced out
@@ -52,25 +60,9 @@ class Handler(FileSystemEventHandler):
                 time.sleep(4)
                 os.system("clear")
                 commit(eventFiles)
-                os.system("clear")
-                autoBranch()
-                os.system("clear")
-                push(autoBranch())
-
-def push(randBranch):
-    try:
-        os.system("git push origin %s" % randBranch)
-        print("Pushing files to auto-master...")
-        os.system("git status")
-    except CalledProcessError as error:
-        errormsg = error.output, error.returncode, error.message
-        print("error", errormsg)
-    status = process.check_output(["git", "push", "origin", "auto-master"], stderr=STDOUT)
-    if "Everything up-to-date" in str(status):
-        os.system("git push origin %s" % randBranch)
-#Merge / New Branch
 
 
+#Pushes with randBranch to auto-Master -> if everything up to date -> use randBranch
 def autoBranch():
     rand = random.randint(1,100)
     try:
@@ -85,7 +77,7 @@ def autoBranch():
             fullBranch = os.system("git checkout -b %s" % randBranch)
             return randBranch
 
-
+#Commit of Changes -> if Data was modified -> name of File attached to commit message -> push
 def commit(eventFiles):
     try:
         status = process.check_output(["git", "status"], stderr=STDOUT)
@@ -95,16 +87,48 @@ def commit(eventFiles):
             print(eventFiles, " modified")
             print(status)
             os.system("git add *")
-            os.system("git commit -m %s" % "auto-pushed_please_merge")
-            push(autoBranch())
+            #os.system("git commit -m %s" % eventFiles)
+            os.system("git commit -m test")
+            push(autoBranch(), eventFiles)
         else:
             print("No modified Data found. Keep on working!")
             print("use control + c to quit the Program")
-            quit()
-            exit()
+            # quit()
+            # exit()
+            return None
     except CalledProcessError as error:
         errormsg = error.output, error.returncode, error.message
         print("error", errormsg)
+
+
+#Pushes with randBranch to random Branch name -> if everything up to date -> use randBranch
+def push(randBranch, eventFiles):
+    try:
+        #status = process.check_output(["git", "push", "origin", "%s" % randBranch], stderr=STDOUT)
+        os.system("git push origin %s" % randBranch)
+        print("Pushing files to auto-master...")
+        checkStatus = process.check_output(["git", "status"])
+        print("Status: ", checkStatus)
+        time.sleep(4)
+        if "Everything up-to-date" in str(checkStatus):
+            print("end")
+            Watcher().stop()
+            init()
+        if "Changes to be committed" in str(checkStatus):
+            os.system("git add *")
+            #os.system("git commit -m %s" % eventFiles)
+            os.system("git commit -m test")
+            os.system("git push origin %s" % randBranch)
+            print("Pushing files to ", randBranch, " ...")
+            os.system("git status")
+    except CalledProcessError as error:
+        errormsg = error.output, error.returncode, error.message
+        if "A branch named" in str(errormsg):
+            print("error", errormsg)
+            quit()
+
+#Merge / New Branch
+
 
 def init():
     print("")
