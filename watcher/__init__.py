@@ -31,9 +31,8 @@ class Watcher():
 
     def stop(self):
         event_handler = Handler()
-        self.observer.schedule(event_handler, self.path, recursive=True)
         self.observer.stop()
-        self.observer.join()
+
 
 
 
