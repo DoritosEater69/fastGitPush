@@ -55,7 +55,7 @@ class Handler(FileSystemEventHandler):
                 os.system("clear")
                 autoBranch()
                 os.system("clear")
-                push()
+                push(autoBranch())
 
 def push(randBranch):
     try:
