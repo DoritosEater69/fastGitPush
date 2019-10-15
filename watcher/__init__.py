@@ -92,7 +92,6 @@ def commit(eventFiles):
         if "modified" in str(status):
             print(eventFiles, " modified")
             print(status)
-            autoBranch()
             print("Test: ",autoBranch())
             time.sleep(4)
             os.system("git add *")
