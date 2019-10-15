@@ -92,7 +92,7 @@ def commit(eventFiles):
             print(eventFiles, " modified")
             print(status)
             autoBranch()
-            print(autoBranch())
+            print("Test: ",autoBranch())
             time.sleep(4)
             os.system("git add *")
             os.system("git commit -m %s" % "auto-pushed_please_merge")
