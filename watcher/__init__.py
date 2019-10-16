@@ -5,6 +5,7 @@ import random
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import subprocess as process
+from subprocess import Popen, PIPE
 import sys
 from subprocess import check_output, STDOUT, CalledProcessError
 
@@ -29,6 +30,12 @@ class Watcher():
 
         self.observer.join()
 
+    def stop(self):
+        event_handler = Handler()
+        self.observer.stop()
+
+
+
 def sliceEvent(event):
     fullEvent = []
 #Event set to String and Splitted by space -> Path of modified File sliced out
@@ -52,37 +59,24 @@ class Handler(FileSystemEventHandler):
                 time.sleep(4)
                 os.system("clear")
                 commit(eventFiles)
-                os.system("clear")
-                autoBranch()
-                os.system("clear")
-                push()
-
-def push():
-    rand = random.randint(1,100)
-    randBranch = os.system("git checkout -f -b auto-master%s" % rand)
-    try:
-        os.system("git push origin %s" % randBranch)
-        print("Pushing files to auto-master...")
-        os.system("git status")
-    except CalledProcessError as error:
-        errormsg = error.output, error.returncode, error.message
-        print("error", errormsg)
-    status = process.check_output(["git", "push", "origin", "auto-master"], stderr=STDOUT)
-    if "Everything up-to-date" in str(status):
-        os.system("git push origin %s" % randBranch)
-#Merge / New Branch
 
 
+#Pushes with randBranch to auto-Master -> if everything up to date -> use randBranch
 def autoBranch():
+    rand = random.randint(1,100)
     try:
-        os.system("git checkout -b auto-master")
+        randBranch = "auto-master%s" % rand
+        fullBranch = os.system("git checkout -b %s" % randBranch)
+        return randBranch
     except CalledProcessError as error:
         errormsg = error.output, error.returncode, error.message
         print("error", errormsg)
         if "A branch named" in str(errormsg) and "already exists" in str(errormsg):
-            os.system("git checkout -f auto-master")
+            randBranch = "auto-master%s" % rand
+            fullBranch = os.system("git checkout -b %s" % randBranch)
+            return randBranch
 
-
+#Commit of Changes -> if Data was modified -> name of File attached to commit message -> push
 def commit(eventFiles):
     try:
         status = process.check_output(["git", "status"], stderr=STDOUT)
@@ -91,20 +85,53 @@ def commit(eventFiles):
         if "modified" in str(status):
             print(eventFiles, " modified")
             print(status)
-            autoBranch()
             os.system("git add *")
-            os.system("git commit -m %s" % "auto-pushed_please_merge")
-            push()
+            #os.system("git commit -m %s" % eventFiles)
+            os.system("git commit -m test")
+            push(autoBranch(), eventFiles)
         else:
             print("No modified Data found. Keep on working!")
             print("use control + c to quit the Program")
-            quit()
-            exit()
+            print("end")
+            Watcher().stop()
+            init()
     except CalledProcessError as error:
         errormsg = error.output, error.returncode, error.message
         print("error", errormsg)
 
+
+#Pushes with randBranch to random Branch name -> if everything up to date -> use randBranch
+def push(randBranch, eventFiles):
+    try:
+        #status = process.check_output(["git", "push", "origin", "%s" % randBranch], stderr=STDOUT)
+        os.system("git push origin %s" % randBranch)
+        print("Pushing files to auto-master...")
+        checkStatus = process.check_output(["git", "status"], stderr=STDOUT)
+        print("Status: ", checkStatus)
+        time.sleep(4)
+        if "Everything up-to-date" in str(checkStatus):
+            print("end")
+            Watcher().stop()
+            init()
+        if "Changes to be committed" in str(checkStatus):
+            os.system("git add *")
+            #os.system("git commit -m %s" % eventFiles)
+            os.system("git commit -m test")
+            os.system("git push origin %s" % randBranch)
+            print("Pushing files to ", randBranch, " ...")
+            os.system("git status")
+    except CalledProcessError as error:
+        errormsg = error.output, error.returncode, error.message
+        if "A branch named" in str(errormsg):
+            print("error", errormsg)
+            quit()
+
+#Merge / New Branch
+
+
 def init():
+#Checks if more than 10 branches -> if so -> Delete them
+    cleanUp()
     print("")
     print("")
     print("Auto Watcher (Auto-Branch)")
@@ -114,3 +141,52 @@ def init():
     print("")
     w = Watcher()
     w.run()
+
+#TESTEN!!! Careful
+def cleanUp():
+    os.system("clear")
+    try:
+        #git branch | grep -v '^*' | xargs git branch -d
+#Safes output (Number of Branches) to temp file / no other solution found, subprocess wont work tho
+        os.system("git branch | wc -l >tmp")
+        branches = int(open('tmp', 'r').read())
+        print(branches ," branches found... deleting Branches that have been merged with Master")
+        os.remove('tmp')
+        if branches > 10:
+            print("Deletion of merged branches\n\n\n")
+            print("\n\n")
+            os.system("git checkout master")
+#Deletes Branches that have been merged to master
+            os.system("git branch | grep -v '^*' | xargs git branch -d >tmp")
+    except process.CalledProcessError as e:
+        print("Error: ", e.output)
+    os.remove('tmp')
+
+    print("Merged Branches have been deleted.")
+    print("Delete all non-fully merged Files? Y/N")
+    choice = raw_input("#debug ")
+
+    if choice.upper() == "Y":
+        #deletion
+        print("Delete")
+        branchLst()
+
+    if choice.upper() == "N":
+        os.system("clear")
+        init()
+
+    else:
+        print("Y/N")
+
+def branchLst():
+    brancheList = []
+    branches = process.check_output(["git", "branch"], stderr=STDOUT).splitlines()
+
+    for val in branches:
+        print(val)
+
+
+def branchKill():
+    print("kill")
+
+
