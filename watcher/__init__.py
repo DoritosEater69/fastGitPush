@@ -187,9 +187,5 @@ def branchLst():
             time.sleep(4)
         print(val)
         os.system("git branch -D %s" % val)
-
-
-def branchKill():
-    print("kill")
-
+    print("Everything cleaned up.")
 
