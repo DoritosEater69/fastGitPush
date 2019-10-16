@@ -180,8 +180,11 @@ def cleanUp():
 
 def branchLst():
     brancheList = []
-    branches = process.check_output(["git", "branch"], stderr=STDOUT)
+    branches = process.check_output(["git", "branch"], stderr=STDOUT).splitlines()
     print(branches)
+
+    for val in branches:
+        print(val)
 
 
 def branchKill():
