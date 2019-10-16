@@ -59,26 +59,6 @@ class Handler(FileSystemEventHandler):
                 time.sleep(4)
                 os.system("clear")
                 commit(eventFiles)
-<<<<<<< HEAD
-=======
-                os.system("clear")
-                autoBranch()
-                os.system("clear")
-                push(autoBranch())
-
-def push(randBranch):
-    try:
-        os.system("git push origin %s" % randBranch)
-        print("Pushing files to auto-master...")
-        os.system("git status")
-    except CalledProcessError as error:
-        errormsg = error.output, error.returncode, error.message
-        print("error", errormsg)
-    status = process.check_output(["git", "push", "origin", "auto-master"], stderr=STDOUT)
-    if "Everything up-to-date" in str(status):
-        os.system("git push origin %s" % randBranch)
-#Merge / New Branch
->>>>>>> 2c88c88600b51ed58a1aad409c736a3f98f06968
 
 
 #Pushes with randBranch to auto-Master -> if everything up to date -> use randBranch
@@ -91,18 +71,10 @@ def autoBranch():
     except CalledProcessError as error:
         errormsg = error.output, error.returncode, error.message
         print("error", errormsg)
-<<<<<<< HEAD
         # if "A branch named" in str(errormsg) and "already exists" in str(errormsg):
         #     randBranch = "auto-master%s" % rand
         #     fullBranch = os.system("git checkout -b %s" % randBranch)
         #     return randBranch
-=======
-        if "A branch named" in str(errormsg) and "already exists" in str(errormsg):
-            randBranch = "auto-master%s" % rand
-            fullBranch = os.system("git checkout -b %s" % randBranch)
-            return randBranch
-
->>>>>>> 2c88c88600b51ed58a1aad409c736a3f98f06968
 
 #Commit of Changes -> if Data was modified -> name of File attached to commit message -> push
 def commit(eventFiles):
@@ -114,14 +86,9 @@ def commit(eventFiles):
             print(eventFiles, " modified")
             print(status)
             os.system("git add *")
-<<<<<<< HEAD
             #os.system("git commit -m %s" % eventFiles)
             os.system("git commit -m test")
             push(autoBranch(), eventFiles)
-=======
-            os.system("git commit -m %s" % "auto-pushed_please_merge")
-            push(autoBranch())
->>>>>>> 2c88c88600b51ed58a1aad409c736a3f98f06968
         else:
             print("No modified Data found. Keep on working!")
             print("use control + c to quit the Program")
