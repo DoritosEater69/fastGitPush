@@ -144,20 +144,45 @@ def init():
 
 #TESTEN!!! Careful
 def cleanUp():
+    os.system("clear")
     try:
         #git branch | grep -v '^*' | xargs git branch -d
 #Safes output (Number of Branches) to temp file / no other solution found, subprocess wont work tho
         os.system("git branch | wc -l >tmp")
         branches = int(open('tmp', 'r').read())
         print(branches ," branches found... deleting Branches that have been merged with Master")
+        os.remove('tmp')
         if branches > 10:
-            print("Delete!")
+            print("Deletion of merged branches\n\n\n")
+            print("\n\n")
             os.system("git checkout master")
 #Deletes Branches that have been merged to master
-            os.system("git branch | grep -v '^*' | xargs git branch -d")
+            os.system("git branch | grep -v '^*' | xargs git branch -d >tmp")
     except process.CalledProcessError as e:
         print("Error: ", e.output)
+    os.remove('tmp')
 
-    print("Merged files have been deleted.")
+    print("Merged Branches have been deleted.")
     print("Delete all non-fully merged Files? Y/N")
-    raw_input("#debug")
+    choice = raw_input("#debug ")
+
+    if choice.upper() == "Y":
+        #deletion
+        print("Delete")
+        branchLst()
+
+    if choice.upper() == "N":
+        os.system("clear")
+        init()
+
+    else:
+        print("Y/N")
+
+def branchLst():
+    branches = process.check_output(["git", "branch"], stderr=STDOUT)
+    print(branches)
+
+
+def branchKill():
+    print("kill")
+
