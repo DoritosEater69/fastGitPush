@@ -5,6 +5,7 @@ import random
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import subprocess as process
+from subprocess import Popen, PIPE
 import sys
 from subprocess import check_output, STDOUT, CalledProcessError
 
@@ -145,8 +146,10 @@ def init():
 def cleanUp():
     try:
         #git branch | grep -v '^*' | xargs git branch -d
-        test = process.check_output(["git", "branch", "|", "wc", "-l"], stderr=STDOUT)
-        print(int(test))
+        os.system("git branch | wc -l")
+        test = process.Popen(["git", "branch", "|", "wc", "-l"], stdout=PIPE)
+        test = test.communicate()
+        print(str(test))
         #branches = process.check_output(["git", "branch", "|", "wc", "-l"], stderr=STDOUT)
         #print(branches)
         # if int(branches) > 10:
