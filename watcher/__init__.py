@@ -160,7 +160,7 @@ def cleanUp():
             os.system("git branch | grep -v '^*' | xargs git branch -d >tmp")
     except process.CalledProcessError as e:
         print("Error: ", e.output)
-    os.remove('tmp')
+
 
     print("Merged Branches have been deleted.")
     print("Delete all non-fully merged Files? Y/N")
@@ -182,9 +182,14 @@ def branchLst():
     brancheList = []
     branches = process.check_output(["git", "branch"], stderr=STDOUT).splitlines()
 
-    for val in branches:
-        print(val)
 
+    for val in branches:
+        if val == "master":
+            branches.remove(val)
+            print("Branches: ", branches)
+            time.sleep(4)
+        print(val)
+        os.system("git branch -D %s" % val)
 
 
 def branchKill():
