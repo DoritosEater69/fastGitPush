@@ -56,7 +56,6 @@ def push(message, path):
             if choice.upper() == "Y":
                 repoURL = os.system("git config --get remote.origin.url")
                 print(repoURL)
-                raw_input("prompt")
                 os.system("git remote add origin %s" % repoURL)
                 os.system("git pull origin master")
                 os.system("git push origin master")
