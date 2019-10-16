@@ -179,8 +179,8 @@ def cleanUp():
         print("Y/N")
 
 def branchLst():
-    branches = []
-    branches += process.check_output(["git", "branch"], stderr=STDOUT)
+    brancheList = []
+    branches = process.check_output(["git", "branch"], stderr=STDOUT)
     print(branches)
 
 
