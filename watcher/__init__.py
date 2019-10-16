@@ -144,8 +144,11 @@ def init():
 #TESTEN!!! Careful
 def cleanUp():
     try:
-        branches = process.check_output(["git", "branch", "| wc", "-l"], stderr=STDOUT)
-        print(branches)
+        #git branch | grep -v '^*' | xargs git branch -d
+        test = process.check_output(["git", "branch", "|", "wc", "-l"])
+        print(test)
+        #branches = process.check_output(["git", "branch", "|", "wc", "-l"], stderr=STDOUT)
+        #print(branches)
         # if int(branches) > 10:
         #     print("Delete!")
         #     os.system("git checkout master")
@@ -153,7 +156,6 @@ def cleanUp():
             #os.system("git branch | grep -v '^*' | xargs git branch -d")
     except process.CalledProcessError as e:
         print("Error: ", e.output)
-    #os.system("git branch | wc -l")
-    else:
-        pass
+    # else:
+    #     pass
 
