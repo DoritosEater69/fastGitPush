@@ -35,7 +35,6 @@ class Watcher():
 
 
 
-
 def sliceEvent(event):
     fullEvent = []
 #Event set to String and Splitted by space -> Path of modified File sliced out
@@ -106,7 +105,7 @@ def push(randBranch, eventFiles):
         #status = process.check_output(["git", "push", "origin", "%s" % randBranch], stderr=STDOUT)
         os.system("git push origin %s" % randBranch)
         print("Pushing files to auto-master...")
-        checkStatus = process.check_output(["git", "status"])
+        checkStatus = process.check_output(["git", "status"], stderr=STDOUT)
         print("Status: ", checkStatus)
         time.sleep(4)
         if "Everything up-to-date" in str(checkStatus):
@@ -130,6 +129,8 @@ def push(randBranch, eventFiles):
 
 
 def init():
+#Checks if more than 10 branches -> if so -> Delete them
+    cleanUp()
     print("")
     print("")
     print("Auto Watcher (Auto-Branch)")
@@ -139,3 +140,20 @@ def init():
     print("")
     w = Watcher()
     w.run()
+
+#TESTEN!!! Careful
+def cleanUp():
+    try:
+        branches = process.check_output(["git", "branch", "| wc", "-l"], stderr=STDOUT)
+        print(branches)
+        # if int(branches) > 10:
+        #     print("Delete!")
+        #     os.system("git checkout master")
+#Deletes Branches that have been merged to master
+            #os.system("git branch | grep -v '^*' | xargs git branch -d")
+    except process.CalledProcessError as e:
+        print("Error: ", e.output)
+    #os.system("git branch | wc -l")
+    else:
+        pass
+
