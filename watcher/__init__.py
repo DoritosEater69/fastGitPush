@@ -146,10 +146,11 @@ def init():
 def cleanUp():
     try:
         #git branch | grep -v '^*' | xargs git branch -d
-        os.system("git branch | wc -l")
-        test = process.Popen(["git", "branch", "|", "wc", "-l"], stdout=PIPE)
-        test = test.communicate()
-        print(str(test))
+        os.system("git branch | wc -l >tmp")
+        print(open('tmp', 'r').read())
+        # test = process.Popen(["git", "branch", "|", "wc", "-l"], stdout=PIPE)
+        # test = test.communicate()
+        # print(str(test))
         #branches = process.check_output(["git", "branch", "|", "wc", "-l"], stderr=STDOUT)
         #print(branches)
         # if int(branches) > 10:
