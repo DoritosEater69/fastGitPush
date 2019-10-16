@@ -146,20 +146,18 @@ def init():
 def cleanUp():
     try:
         #git branch | grep -v '^*' | xargs git branch -d
+#Safes output (Number of Branches) to temp file / no other solution found, subprocess wont work tho
         os.system("git branch | wc -l >tmp")
-        print(open('tmp', 'r').read())
-        # test = process.Popen(["git", "branch", "|", "wc", "-l"], stdout=PIPE)
-        # test = test.communicate()
-        # print(str(test))
-        #branches = process.check_output(["git", "branch", "|", "wc", "-l"], stderr=STDOUT)
-        #print(branches)
-        # if int(branches) > 10:
-        #     print("Delete!")
-        #     os.system("git checkout master")
+        branches = int(open('tmp', 'r').read())
+        print(branches ," branches found... deleting Branches that have been merged with Master")
+        if branches > 10:
+            print("Delete!")
+            os.system("git checkout master")
 #Deletes Branches that have been merged to master
-            #os.system("git branch | grep -v '^*' | xargs git branch -d")
+            os.system("git branch | grep -v '^*' | xargs git branch -d")
     except process.CalledProcessError as e:
         print("Error: ", e.output)
-    # else:
-    #     pass
 
+    print("Merged files have been deleted.")
+    print("Delete all non-fully merged Files? Y/N")
+    raw_input("#debug")
