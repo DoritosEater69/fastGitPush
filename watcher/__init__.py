@@ -71,10 +71,10 @@ def autoBranch():
     except CalledProcessError as error:
         errormsg = error.output, error.returncode, error.message
         print("error", errormsg)
-        if "A branch named" in str(errormsg) and "already exists" in str(errormsg):
-            randBranch = "auto-master%s" % rand
-            fullBranch = os.system("git checkout -b %s" % randBranch)
-            return randBranch
+        # if "A branch named" in str(errormsg) and "already exists" in str(errormsg):
+        #     randBranch = "auto-master%s" % rand
+        #     fullBranch = os.system("git checkout -b %s" % randBranch)
+        #     return randBranch
 
 #Commit of Changes -> if Data was modified -> name of File attached to commit message -> push
 def commit(eventFiles):
