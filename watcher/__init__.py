@@ -145,7 +145,7 @@ def init():
 def cleanUp():
     try:
         #git branch | grep -v '^*' | xargs git branch -d
-        test = process.check_output(["git", "branch", "|", "wc", "-l"])
+        test = process.check_output(["git", "branch |", "wc -l"])
         print(test)
         #branches = process.check_output(["git", "branch", "|", "wc", "-l"], stderr=STDOUT)
         #print(branches)
